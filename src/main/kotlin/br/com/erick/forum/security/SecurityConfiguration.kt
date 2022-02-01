@@ -21,7 +21,8 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.authorizeHttpRequests()?.
         antMatchers(HttpMethod.GET,"/topicos")?.permitAll()?.
-        antMatchers(HttpMethod.GET,"/topicos/*")?.permitAll()
+        antMatchers(HttpMethod.GET,"/topicos/*")?.permitAll()?.
+        anyRequest()?.authenticated()
     }
 
     //Configurações de recursos estaticos(js,css,imagens,etc)
