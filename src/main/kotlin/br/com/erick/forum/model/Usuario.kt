@@ -2,10 +2,7 @@ package br.com.erick.forum.model
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Usuario (
@@ -13,33 +10,36 @@ class Usuario (
     val id: Long? = null,
     val nome: String,
     val email: String,
-    val senha: String
+    val senha: String,
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private val perfil : MutableList<Perfil>
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        return this.perfil
     }
 
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return senha
     }
 
     override fun getUsername(): String {
-        TODO("Not yet implemented")
+        return email
     }
 
     override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 }
