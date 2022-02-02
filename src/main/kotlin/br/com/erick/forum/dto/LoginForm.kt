@@ -1,5 +1,7 @@
 package br.com.erick.forum.dto
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+
 class LoginForm(
 
     private var email: String,
@@ -20,6 +22,10 @@ class LoginForm(
     fun getSenha(): String {
         return this.senha
         return this.senha
+    }
+
+    fun converter(): UsernamePasswordAuthenticationToken {
+        return UsernamePasswordAuthenticationToken(email,senha)
     }
 
 }
