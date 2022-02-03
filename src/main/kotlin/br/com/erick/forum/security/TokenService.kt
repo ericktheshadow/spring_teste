@@ -26,9 +26,10 @@ class TokenService(
         var hoje : Date = Calendar.getInstance().time
         println(hoje)
         var dataExpiracao : Date = Date(hoje.time + expiration.toLong())
+        println(dataExpiracao)
         return Jwts.builder().setIssuer("Erick Spring Teste").
         setSubject(logado.id.toString()).setIssuedAt(hoje).
-                setExpiration(dataExpiracao).signWith(SignatureAlgorithm.ES256,secret).compact()
+                setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256,secret).compact()
     }
 
 }
