@@ -24,11 +24,11 @@ class LoginForm(
 
     fun getSenha(): String {
 
-        return BCryptPasswordEncoder().encode(this.senha)
+        return this.senha
     }
 
     fun converter(): UsernamePasswordAuthenticationToken {
-        return UsernamePasswordAuthenticationToken(email,BCryptPasswordEncoder().encode(this.senha))
+        return UsernamePasswordAuthenticationToken(email,senha)
     }
 
 }
