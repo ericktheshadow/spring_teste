@@ -25,11 +25,15 @@ class SecurityConfiguration(
     override fun authenticationManager(): AuthenticationManager {
         return super.authenticationManager()
     }
+    @Bean
+    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
+        return BCryptPasswordEncoder()
+    }
 
     //Configurações de autenticação
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.userDetailsService(autenticacaoService)?.passwordEncoder(BCryptPasswordEncoder())
-        // println(auth?.userDetailsService(autenticacaoService)?.passwordEncoder(BCryptPasswordEncoder()))
+        auth?.userDetailsService(autenticacaoService)?.passwordEncoder(bCryptPasswordEncoder())
+        // println(auth?.userDetailsService(autenticacaoService)?.passwordEncoder(bCryptPasswordEncoder()))
     }
 
     //Configurações de Autorização

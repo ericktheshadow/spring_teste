@@ -14,6 +14,9 @@ class AutenticacaoService(
 
 ) : UserDetailsService {
 
+    fun buscarPorId(id: Long): Usuario {
+        return repository.getOne(id)
+    }
     override fun loadUserByUsername(username: String?): UserDetails {
         val usuario: Optional<Usuario>? = username?.let { repository.findByEmail(it) }
         if (usuario != null) {
@@ -23,4 +26,5 @@ class AutenticacaoService(
         }
         throw UsernameNotFoundException("Dados invalidos")
     }
+
 }

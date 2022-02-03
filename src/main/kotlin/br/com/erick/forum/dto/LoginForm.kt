@@ -3,6 +3,7 @@ package br.com.erick.forum.dto
 import br.com.erick.forum.controller.AutenticacaoController
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 class LoginForm(
 
@@ -23,11 +24,11 @@ class LoginForm(
 
     fun getSenha(): String {
 
-        return this.senha
+        return BCryptPasswordEncoder().encode(this.senha)
     }
 
     fun converter(): UsernamePasswordAuthenticationToken {
-        return UsernamePasswordAuthenticationToken(email,senha)
+        return UsernamePasswordAuthenticationToken(email,BCryptPasswordEncoder().encode(this.senha))
     }
 
 }
