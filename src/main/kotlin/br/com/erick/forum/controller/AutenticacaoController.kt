@@ -38,6 +38,7 @@ class AutenticacaoController(
             println("passou por aqui dados login")
             var token :String = tokenService.gerarToken(authentication)
             println("passou por aqui tbm")
+            println(ResponseEntity.ok(TokenDto(token,"Bearer")))
             return ResponseEntity.ok(TokenDto(token,"Bearer"))//.build()
         }catch (e : AuthenticationException){
             println("Passou por aqui")
