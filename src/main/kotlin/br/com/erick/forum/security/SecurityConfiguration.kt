@@ -28,6 +28,9 @@ class SecurityConfiguration(
 
     //Configurações de autenticação
     override fun configure(auth: AuthenticationManagerBuilder?) {
+        println("começo autenticação")
+        println(auth?.userDetailsService(autenticacaoService)?.passwordEncoder(BCryptPasswordEncoder()))
+        println("final autenticacao")
         auth?.userDetailsService(autenticacaoService)?.passwordEncoder(BCryptPasswordEncoder())
         // println(auth?.userDetailsService(autenticacaoService)?.passwordEncoder(BCryptPasswordEncoder()))
     }
