@@ -27,7 +27,6 @@ class LoginForm(
     }
 
     fun converter(): UsernamePasswordAuthenticationToken {
-        println(UsernamePasswordAuthenticationToken(email,senha))
         return UsernamePasswordAuthenticationToken(email,senha)
     }
 

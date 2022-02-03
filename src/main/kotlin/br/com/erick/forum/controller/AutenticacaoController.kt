@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.crypto.bcrypt.BCrypt
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -21,7 +23,7 @@ class AutenticacaoController(
     private val authManager: AuthenticationManager,
 
     @Autowired
-    private var tokenService : TokenService
+    private val tokenService : TokenService
 ) {
     @PostMapping
     fun autenticar(@RequestBody @Valid form: LoginForm): ResponseEntity<TokenDto> {
@@ -31,8 +33,9 @@ class AutenticacaoController(
         var dadosLogin: UsernamePasswordAuthenticationToken = form.converter()
 
         try {
+
             var authentication = authManager.authenticate(dadosLogin)
-            println("passou por aqui aaa")
+            println("passou por aqui dados login")
             var token :String = tokenService.gerarToken(authentication)
             println("passou por aqui tbm")
             return ResponseEntity.ok(TokenDto(token,"Bearer"))//.build()
