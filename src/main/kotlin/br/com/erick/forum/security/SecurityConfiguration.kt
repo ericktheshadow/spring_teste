@@ -45,9 +45,10 @@ class SecurityConfiguration(
     //Configurações de Autorização
     override fun configure(http: HttpSecurity?) {
         http?.authorizeHttpRequests()?.antMatchers(HttpMethod.GET, "/topicos")?.permitAll()
-            ?.antMatchers(HttpMethod.GET, "/topicos/*")?.
-            permitAll()?.
+            ?.antMatchers(HttpMethod.GET, "/topicos/*")?.permitAll()
+            ?.antMatchers(HttpMethod.POST, "/topicos")?.permitAll()?.
             antMatchers(HttpMethod.POST, "/auth")?.permitAll()?.
+            antMatchers(HttpMethod.GET, "/actuator/**")?.permitAll()?.
             anyRequest()?.authenticated()?.
             and()?.csrf()
             ?.disable()?.sessionManagement()?.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -57,6 +58,7 @@ class SecurityConfiguration(
 
     //Configurações de recursos estaticos(js,css,imagens,etc)
     override fun configure(web: WebSecurity?) {
+        web?.ignoring()?.antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**")
 
     }
 }

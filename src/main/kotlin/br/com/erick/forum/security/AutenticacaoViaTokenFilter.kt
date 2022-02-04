@@ -35,7 +35,7 @@ class AutenticacaoViaTokenFilter : OncePerRequestFilter {
 
     private fun autenticarCliente(token: String) {
         val idUsuario:Long=tokenService.getIdUsuario(token)
-        val usuario : Usuario = repository.getOne(idUsuario)
+        val usuario : Usuario = repository.findById(idUsuario).get()
         val autentication = UsernamePasswordAuthenticationToken(usuario,null,usuario.authorities)
         SecurityContextHolder.getContext().authentication = autentication
     }
@@ -43,7 +43,7 @@ class AutenticacaoViaTokenFilter : OncePerRequestFilter {
     private fun recuperarToken(request: HttpServletRequest): String {
         val token = request.getHeader("Authorization")
         if (token == null || token.isEmpty() || token.startsWith("Bearer ")) {
-            null
+            return null.toString()
         }
         return token.substring(7, token.length)
     }
