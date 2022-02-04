@@ -7,7 +7,7 @@ class TokenDto(
     fun TokenDto(token: String, tipo: String) {
         this.token=token
         this.tipo=tipo
-            }
+    }
     fun getToken(token: String){
         this.token=token
     }

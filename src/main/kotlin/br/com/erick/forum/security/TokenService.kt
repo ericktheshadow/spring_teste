@@ -32,4 +32,18 @@ class TokenService(
                 setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256,secret).compact()
     }
 
+    fun isTokenValido(token: String): Boolean {
+        return try {
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
+            true
+        }catch (e:Exception){
+            false
+        }
+    }
+
+    fun getIdUsuario(token: String): Long {
+        val claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).body
+        return claims.subject.toLong()
+    }
+
 }

@@ -1,5 +1,6 @@
 package br.com.erick.forum.security
 
+import br.com.erick.forum.repository.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,12 +13,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @EnableWebSecurity
 @Configuration
 class SecurityConfiguration(
     @Autowired
-    private val autenticacaoService: AutenticacaoService
+    private val autenticacaoService: AutenticacaoService,
+    @Autowired
+    private val tokenService: TokenService,
+    @Autowired
+    private val usuarioRepository: UsuarioRepository
 
 ) : WebSecurityConfigurerAdapter() {
 
@@ -45,6 +51,7 @@ class SecurityConfiguration(
             anyRequest()?.authenticated()?.
             and()?.csrf()
             ?.disable()?.sessionManagement()?.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            ?.and()?.addFilterBefore(AutenticacaoViaTokenFilter(tokenService,usuarioRepository),UsernamePasswordAuthenticationFilter().javaClass)
         //and()?.formLogin()
     }
 
