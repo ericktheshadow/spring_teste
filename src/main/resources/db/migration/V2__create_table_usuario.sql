@@ -7,3 +7,5 @@ create table usuario(
 );
 
 insert into usuario values(1,'erick','erick@email.com',"$2a$10$j3S6jvBdV2xfaPnhvrM3S.MEx58GZrFCB69hdITlx.DEI1rIB7eT6");
+insert into usuario values(2,'mod','mod@email.com',"$2a$10$j3S6jvBdV2xfaPnhvrM3S.MEx58GZrFCB69hdITlx.DEI1rIB7eT6");
+
