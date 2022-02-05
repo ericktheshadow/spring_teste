@@ -18,8 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
-@Profile("prod")
-class SecurityConfiguration(
+@Profile("dev")
+class DevSecurityConfiguration(
     @Autowired
     private val autenticacaoService: AutenticacaoService,
     @Autowired

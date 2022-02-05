@@ -4,6 +4,7 @@ import br.com.erick.forum.dto.LoginForm
 import br.com.erick.forum.dto.TokenDto
 import br.com.erick.forum.security.TokenService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -18,6 +19,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/auth")
+@Profile("prod")
 class AutenticacaoController(
     @Autowired
     private val authManager: AuthenticationManager,
