@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @SpringBootApplication
 //@EnableSpringDataWebSupport
 @EnableCaching
-@EnableSwagger2
+//@EnableSwagger2
 class TesteJpaApplication
 
 fun main(args: Array<String>) {
